@@ -1,6 +1,7 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"math/rand"
 	"time"
@@ -9,6 +10,8 @@ import (
 type Maze struct {
 	width, height int
 	cells         [][]int
+
+	debug bool
 }
 
 func (m *Maze) set(x, y, v int) {
@@ -110,12 +113,16 @@ func (m *Maze) Generate() {
 	}
 }
 
+var (
+	width  = flag.Int("width", 7, "width")
+	height = flag.Int("height", 7, "height")
+)
+
 func main() {
+	flag.Parse()
 	rand.Seed(time.Now().UnixNano())
-	m := Maze{}
-	m.init(7, 7)
-	m.printMap()
-	fmt.Printf("m = %+v\n", m)
+	m := Maze{debug: false}
+	m.init(*width, *height)
 	m.Generate()
 	m.printMap()
 }
