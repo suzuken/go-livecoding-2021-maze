@@ -73,7 +73,16 @@ func (m *Maze) Generate() {
 		ret := make([]cell, 0)
 		// 上下左右
 		if m.get(c.x, c.y-1) == 1 && m.get(c.x, c.y-2) != 0 && m.get(c.x-1, c.y-1) != 0 && m.get(c.x+1, c.y-1) != 0 {
-			ret = append(ret, cell{c.x, c.y - 1})
+			ret = append(ret, cell{c.x, c.y - 1}) // 上
+		}
+		if m.get(c.x, c.y+1) == 1 && m.get(c.x, c.y+2) != 0 && m.get(c.x-1, c.y+1) != 0 && m.get(c.x+1, c.y+1) != 0 {
+			ret = append(ret, cell{c.x, c.y + 1}) // 下
+		}
+		if m.get(c.x-1, c.y) == 1 && m.get(c.x-2, c.y) != 0 && m.get(c.x-1, c.y+1) != 0 && m.get(c.x-1, c.y-1) != 0 {
+			ret = append(ret, cell{c.x - 1, c.y}) // 左
+		}
+		if m.get(c.x+1, c.y) == 1 && m.get(c.x+2, c.y) != 0 && m.get(c.x+1, c.y+1) != 0 && m.get(c.x+1, c.y-1) != 0 {
+			ret = append(ret, cell{c.x + 1, c.y}) // 右
 		}
 		return ret
 	}
