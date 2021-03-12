@@ -108,6 +108,10 @@ func (m *Maze) Generate() {
 			cur = next
 		}
 
+		if m.debug {
+			fmt.Printf("stack = %+v\n", stack)
+		}
+
 		cur = stack[len(stack)-1]
 		stack = stack[:len(stack)-1]
 	}
@@ -116,12 +120,13 @@ func (m *Maze) Generate() {
 var (
 	width  = flag.Int("width", 7, "width")
 	height = flag.Int("height", 7, "height")
+	debug  = flag.Bool("debug", false, "debug mode")
 )
 
 func main() {
 	flag.Parse()
 	rand.Seed(time.Now().UnixNano())
-	m := Maze{debug: false}
+	m := Maze{debug: *debug}
 	m.init(*width, *height)
 	m.Generate()
 	m.printMap()
