@@ -65,6 +65,7 @@ func (m *Maze) Generate() {
 
 	stack := make([]cell, 0)
 	stack = append(stack, start)
+	m.set(start.x, start.y, 0)
 
 	var cur cell
 	cur = start
@@ -99,11 +100,11 @@ func (m *Maze) Generate() {
 			// そのマスを道にする
 			// つぎにいく・・
 			next := cc[rand.Intn(len(cc))]
+			stack = append(stack, next)
 			m.set(next.x, next.y, 0)
 			cur = next
 		}
 
-		// stackをpop
 		cur = stack[len(stack)-1]
 		stack = stack[:len(stack)-1]
 	}
