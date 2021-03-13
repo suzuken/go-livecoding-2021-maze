@@ -93,15 +93,10 @@ func (m *Maze) Generate() {
 
 	for len(stack) >= 1 {
 		for {
-			// 方向をそれぞれみるー
 			cc := candidates(cur)
 			if len(cc) == 0 {
 				break
 			}
-			// 全方向だめならぬける
-			// どっちにいくかきめて
-			// そのマスを道にする
-			// つぎにいく・・
 			next := cc[rand.Intn(len(cc))]
 			stack = append(stack, next)
 			m.set(next.x, next.y, 0)
